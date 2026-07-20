@@ -3,1244 +3,695 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026年7月 AI政策日报 - 全球人工智能政策跟踪分析</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<title>AI政策日报 - 2026年7月20日</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 :root {
-  --primary: #1a56db;
-  --primary-light: #3b82f6;
-  --secondary: #059669;
-  --accent: #d97706;
-  --danger: #dc2626;
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --primary: #1a5276;
+  --secondary: #e74c3c;
+  --accent: #2ecc71;
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --text: #2c3e50;
+  --muted: #7f8c8d;
+  --border: #e9ecef;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-/* Header */
-.header {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%);
-  color: white; padding: 40px 0; text-align: center; position: relative; overflow: hidden;
+header {
+  background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
 }
-.header::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+header .subtitle { font-size: 1rem; opacity: 0.9; }
+header .date-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-top: 15px;
+  font-size: 0.95rem;
 }
-.header-content { position: relative; z-index: 1; }
-.header h1 { font-size: 2.2em; margin-bottom: 8px; font-weight: 700; letter-spacing: 1px; }
-.header .date-badge {
-  display: inline-block; background: rgba(255,255,255,0.15); padding: 6px 20px;
-  border-radius: 20px; font-size: 0.95em; margin-top: 8px; backdrop-filter: blur(4px);
+nav {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 0;
 }
-.header .subtitle { font-size: 1.1em; opacity: 0.9; margin-top: 12px; }
-
-/* Tab Navigation */
-.tab-nav {
-  display: flex; gap: 0; background: white; border-bottom: 2px solid var(--border);
-  box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
+nav button {
+  background: none;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  font-weight: 500;
 }
-.tab-btn {
-  flex: 1; padding: 16px 24px; border: none; background: none; cursor: pointer;
-  font-size: 1em; font-weight: 600; color: var(--text-secondary);
-  transition: all 0.3s; border-bottom: 3px solid transparent; margin-bottom: -2px;
+nav button.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 700;
 }
-.tab-btn:hover { color: var(--primary); background: #f1f5f9; }
-.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
-.tab-btn .count {
-  display: inline-block; background: #fee2e2; color: #dc2626; font-size: 0.75em;
-  padding: 1px 8px; border-radius: 10px; margin-left: 6px; font-weight: 700;
-}
-
-/* Section */
-.section { display: none; padding: 32px 0; }
+nav button:hover { color: var(--primary); }
+.container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+.section { display: none; }
 .section.active { display: block; }
-.section-title {
-  font-size: 1.5em; font-weight: 700; color: var(--text); margin-bottom: 24px;
-  padding-bottom: 12px; border-bottom: 3px solid var(--primary);
-  display: flex; align-items: center; gap: 10px;
-}
-.section-title .icon { font-size: 1.2em; }
-
-/* Cards */
 .card {
-  background: var(--card-bg); border-radius: 12px; box-shadow: var(--shadow);
-  padding: 24px; margin-bottom: 20px; border-left: 4px solid var(--primary);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
 }
-.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-.card.level-national { border-left-color: var(--primary); }
-.card.level-local { border-left-color: var(--secondary); }
-.card.level-international { border-left-color: var(--accent); }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
-.card-title { font-size: 1.15em; font-weight: 700; color: var(--text); flex: 1; }
-.card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.badge {
-  display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.8em; font-weight: 600;
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.badge-national { background: #dbeafe; color: #1e40af; }
-.badge-local { background: #d1fae5; color: #065f46; }
-.badge-international { background: #fef3c7; color: #92400e; }
-.badge-effective { background: #dcfce7; color: #166534; }
-.badge-upcoming { background: #fef9c3; color: #854d0e; }
-.badge-today { background: #fee2e2; color: #991b1b; }
+.card h2 .icon { font-size: 1.3rem; }
+.chart-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  border: 1px solid var(--border);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 0.92rem;
+}
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: var(--primary);
+  position: sticky;
+  top: 0;
+}
+tr:hover { background: #f8fafc; }
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.tag-national { background: #fde8e8; color: #c53030; }
+.tag-ministry { background: #e0f2fe; color: #0369a1; }
+.tag-local { background: #fef3c7; color: #b45309; }
+.tag-law { background: #d1fae5; color: #047857; }
+.tag-us { background: #fee2e2; color: #991b1b; }
+.tag-eu { background: #f3e8ff; color: #6b21a8; }
+.tag-kr { background: #ccfbf1; color: #0f766e; }
 .source-link {
-  display: inline-block; color: var(--primary-light); font-size: 0.85em;
-  text-decoration: none; margin-top: 4px; transition: color 0.2s;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.85rem;
 }
-.source-link:hover { color: var(--primary); text-decoration: underline; }
-.card-body { margin-top: 16px; }
-.card-body p { color: var(--text-secondary); margin-bottom: 8px; }
-.detail-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92em; }
-.detail-table th, .detail-table td {
-  padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+.source-link:hover { text-decoration: underline; }
+.summary-box {
+  background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
-.detail-table th { background: #f1f5f9; color: var(--text-secondary); font-weight: 600; width: 120px; white-space: nowrap; }
-.detail-table td { color: var(--text); }
-.policy-points { list-style: none; padding: 0; margin-top: 12px; }
-.policy-points li {
-  padding: 8px 0 8px 24px; position: relative; border-bottom: 1px solid #f1f5f9;
-  color: var(--text-secondary); font-size: 0.93em;
+.summary-box h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
+.keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.keyword {
+  background: #e0f2fe;
+  color: #075985;
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 0.88rem;
+  font-weight: 500;
 }
-.policy-points li::before {
-  content: '▸'; position: absolute; left: 4px; color: var(--primary-light); font-weight: 700;
+.keyword.hot { background: #fee2e2; color: #991b1b; }
+.btn-pdf {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+  transition: all 0.3s;
+  z-index: 200;
+  font-weight: 600;
 }
-.policy-points li:last-child { border-bottom: none; }
-
-/* Timeline */
-.timeline { position: relative; padding-left: 32px; }
-.timeline::before {
-  content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
-  border-radius: 2px;
+.btn-pdf:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,76,60,0.4); }
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--border);
 }
-.timeline-item { position: relative; margin-bottom: 24px; }
-.timeline-dot {
-  position: absolute; left: -26px; top: 4px; width: 16px; height: 16px;
-  border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow);
+.timeline-item:last-child { border-bottom: none; }
+.timeline-date {
+  min-width: 100px;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.95rem;
 }
-.timeline-dot.today { background: var(--danger); }
-.timeline-dot.july { background: var(--primary); }
-.timeline-dot.upcoming { background: var(--accent); }
-.timeline-date { font-size: 0.85em; font-weight: 700; color: var(--text-secondary); margin-bottom: 4px; }
-.timeline-content {
-  background: white; padding: 16px; border-radius: 10px; box-shadow: var(--shadow);
-  font-size: 0.93em;
+.timeline-content h4 { font-size: 1.05rem; margin-bottom: 4px; }
+.timeline-content p { color: var(--muted); font-size: 0.88rem; }
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
 }
-.timeline-content .tl-title { font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.timeline-content .tl-desc { color: var(--text-secondary); font-size: 0.9em; }
-.timeline-content .tl-source { margin-top: 6px; }
-
-/* Charts */
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
-.chart-card {
-  background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 20px;
-}
-.chart-card.full-width { grid-column: 1 / -1; }
-.chart-title { font-size: 1.05em; font-weight: 700; margin-bottom: 16px; color: var(--text); }
-.chart-container { position: relative; width: 100%; }
-canvas { max-width: 100%; }
-
-/* Keywords */
-.keywords-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; justify-content: center; }
-.keyword-tag {
-  display: inline-block; padding: 8px 18px; border-radius: 20px; font-weight: 600;
-  cursor: default; transition: transform 0.2s;
-}
-.keyword-tag:hover { transform: scale(1.08); }
-.keyword-tag.hot { background: #fee2e2; color: #991b1b; font-size: 1.3em; }
-.keyword-tag.warm { background: #fef3c7; color: #92400e; font-size: 1.15em; }
-.keyword-tag.medium { background: #dbeafe; color: #1e40af; font-size: 1em; }
-.keyword-tag.cool { background: #d1fae5; color: #065f46; font-size: 0.9em; }
-
-/* Comparison */
-.comparison-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-.comparison-table th, .comparison-table td {
-  padding: 12px 14px; text-align: left; border: 1px solid var(--border); font-size: 0.9em;
-}
-.comparison-table th { background: #f1f5f9; font-weight: 700; color: var(--text-secondary); }
-.comparison-table td { color: var(--text); vertical-align: top; }
-.comparison-table tr:hover { background: #f8fafc; }
-
-/* Download Button */
-.download-bar {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999;
-}
-.download-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; background: var(--primary); color: white;
-  border: none; border-radius: 12px; font-size: 1em; font-weight: 600;
-  cursor: pointer; box-shadow: var(--shadow-lg); transition: all 0.3s;
-}
-.download-btn:hover { background: #1347b8; transform: translateY(-2px); box-shadow: 0 12px 20px rgba(26,86,219,0.3); }
-.download-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-.download-btn .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
-.download-btn.loading .spinner { display: inline-block; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Stats */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
-.stat-card {
-  background: white; border-radius: 12px; padding: 20px; box-shadow: var(--shadow); text-align: center;
-}
-.stat-number { font-size: 2em; font-weight: 800; color: var(--primary); }
-.stat-label { font-size: 0.9em; color: var(--text-secondary); margin-top: 4px; }
-.stat-card:nth-child(2) .stat-number { color: var(--secondary); }
-.stat-card:nth-child(3) .stat-number { color: var(--accent); }
-.stat-card:nth-child(4) .stat-number { color: var(--danger); }
-
-/* Footer */
-.footer { text-align: center; padding: 32px 0; color: var(--text-secondary); font-size: 0.85em; border-top: 1px solid var(--border); margin-top: 40px; }
-.footer a { color: var(--primary-light); text-decoration: none; }
-
-/* Trend arrow */
-.trend-up { color: #16a34a; }
-.trend-down { color: #dc2626; }
-.trend-flat { color: #ca8a04; }
-
-/* Compare section highlight */
-.highlight-new { background: #dcfce7; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: 600; }
-.highlight-changed { background: #fef9c3; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: 600; }
-.highlight-removed { background: #fee2e2; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: 600; }
-
-/* Print */
-@media print {
-  .download-bar { display: none !important; }
-  .tab-nav { position: relative; }
-  .section { display: block !important; page-break-inside: avoid; }
-  .header { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-}
-
-/* Responsive */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 @media (max-width: 768px) {
-  .charts-grid { grid-template-columns: 1fr; }
-  .header h1 { font-size: 1.5em; }
-  .tab-btn { padding: 12px 16px; font-size: 0.9em; }
+  .two-col { grid-template-columns: 1fr; }
+  header h1 { font-size: 1.5rem; }
+  nav button { padding: 12px 16px; font-size: 0.9rem; }
+}
+@media print {
+  nav, .btn-pdf { display: none !important; }
+  .section { display: block !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+  .chart-img { max-height: 400px; }
 }
 </style>
 </head>
 <body>
+<header>
+  <h1>AI政策日报</h1>
+  <p class="subtitle">全球人工智能政策动态监测与分析</p>
+  <div class="date-badge">数据日期：2026年7月20日</div>
+</header>
 
-<!-- Header -->
-<div class="header">
-  <div class="header-content container">
-    <h1>🤖 2026年7月 AI政策日报</h1>
-    <div class="subtitle">全球人工智能政策跟踪与深度分析报告</div>
-    <div class="date-badge">📅 2026年7月8日 星期三 · 每日更新</div>
-  </div>
-</div>
+<nav>
+  <button class="active" onclick="showSection('domestic')">国内政策分析</button>
+  <button onclick="showSection('foreign')">国外政策分析</button>
+  <button onclick="showSection('overview')">全览与趋势</button>
+</nav>
 
-<!-- Tab Navigation -->
 <div class="container">
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('domestic')">
-      🇨🇳 国内政策 <span class="count">6</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('international')">
-      🌍 国外政策 <span class="count">9</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('analysis')">
-      📊 数据分析 <span class="count">NEW</span>
-    </button>
+
+<!-- ========== DOMESTIC SECTION ========== -->
+<div id="domestic" class="section active">
+  <div class="summary-box">
+    <h3>国内政策摘要</h3>
+    <p>2026年7月，国内AI政策密集发布，以7月17日世界人工智能大会(WAIC)为关键节点，国家发改委发布《人工智能合作发展行动计划》，上海、北京等地同步推出产业配套政策。本月政策呈现"国家战略引领+地方精准落地"的双重特征，重点关注AI+制造、大模型、智能体、数据安全等领域。</p>
+    <div class="keywords">
+      <span class="keyword hot">人工智能合作发展</span>
+      <span class="keyword hot">AI+制造</span>
+      <span class="keyword">拟人化互动</span>
+      <span class="keyword">大模型</span>
+      <span class="keyword">智能体</span>
+      <span class="keyword">数据安全</span>
+      <span class="keyword">算力</span>
+    </div>
   </div>
 
-  <!-- ==================== 国内政策 ==================== -->
-  <div id="domestic" class="section active">
-    <!-- Stats -->
-    <div class="stats-grid" style="margin-top:24px;">
-      <div class="stat-card"><div class="stat-number">6</div><div class="stat-label">本月追踪政策</div></div>
-      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">国家级政策</div></div>
-      <div class="stat-card"><div class="stat-number">1</div><div class="stat-label">地方级政策</div></div>
-      <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">本月生效法规</div></div>
-    </div>
-
-    <!-- Timeline -->
-    <h2 class="section-title"><span class="icon">📅</span> 今日政策发布时间线</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot today"></div>
-        <div class="timeline-date">2026年7月8日 · 今天</div>
-        <div class="timeline-content">
-          <div class="tl-title">📌 今日暂无新发布的AI专项政策</div>
-          <div class="tl-desc">截至发稿，7月8日当天未检索到新发布的AI专项政策文件。今日重要动态：联合国日内瓦AI治理系列峰会（7月6-10日）正在进行中。</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月7日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🏛️ 第六届中国数据要素50人论坛</div>
-          <div class="tl-desc">聚焦"激活数据要素潜能，驱动智能经济高质量发展"，提出严惩深度伪造、算法歧视，构建高质量语料供给体系。</div>
-          <div class="tl-source"><a class="source-link" href="http://finance.people.com.cn/n1/2026/0707/c1004-40755316.html" target="_blank">来源：人民网</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月6日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🛡️ "清朗·整治AI应用乱象"专项行动成果公布</div>
-          <div class="tl-desc">中央网信办公布第一阶段成果：累计处置违规AI产品1.4万余款，清理违法违规信息600余万条，处置账号2.6万余个。</div>
-          <div class="tl-source"><a class="source-link" href="http://society.people.com.cn/n1/2026/0706/c1008-40754457.html" target="_blank">来源：人民网</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月2日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🔬 北京AI赋能科学研究实施方案公布</div>
-          <div class="tl-desc">《北京市加快推进人工智能赋能科学研究实施方案（2026-2028年）》正式公布，18条措施推动科学智能创新。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202607/t20260702_4743249.html" target="_blank">来源：北京市政府</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月1日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🔒 《网络安全标识管理办法》正式施行</div>
-          <div class="tl-desc">网信办、工信部、公安部三部门联合制定的网络安全标识制度正式实施，设基础级（一星）、增强级（二星）、领先级（三星）三级标识体系。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.gov.cn/zhengce/zhengceku/202604/content_7065212.htm" target="_blank">来源：中国政府网</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot upcoming"></div>
-        <div class="timeline-date">2026年7月15日 · 即将生效</div>
-        <div class="timeline-content">
-          <div class="tl-title">🤖 《人工智能拟人化互动服务管理暂行办法》施行</div>
-          <div class="tl-desc">中国首部AI拟人化互动服务专项监管法规，涵盖情感陪伴AI、虚拟数字人等场景，7月15日起正式实施。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.gov.cn/gongbao/2026/issue_12806/202606/content_7072472.html" target="_blank">来源：国务院公报</a></div>
-        </div>
+  <div class="card">
+    <h2><span class="icon">📅</span> 国内政策发布时间线</h2>
+    <img src="images/domestic_timeline.png" alt="国内政策时间线" class="chart-img">
+    <div class="timeline-item">
+      <div class="timeline-date">7月6日</div>
+      <div class="timeline-content">
+        <h4>《人工智能+信息通信创新发展实施意见(2026—2028年)》</h4>
+        <p>工信部发布，推动AI与信息通信业深度融合</p>
       </div>
     </div>
-
-    <!-- National Policies -->
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">🏛️</span> 本月国家级政策详情</h2>
-
-    <!-- Policy 1 -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">《网络安全标识管理办法》</div>
-        <div><span class="badge badge-effective">✅ 7月1日已生效</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">网信办·工信部·公安部</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年4月10日发布，2026年7月1日施行</td></tr>
-          <tr><th>发布单位</th><td>国家互联网信息办公室、工业和信息化部、公安部</td></tr>
-          <tr><th>监督/执行单位</th><td>国家网信办、工信部、公安部；地方各级网信、工信、公安部门</td></tr>
-          <tr><th>文号</th><td>三部门联合印发</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求：</h4>
-        <ul class="policy-points">
-          <li>建立<strong>网络安全标识制度</strong>，为具有互联网联网功能的产品建立"产品安全出身证"</li>
-          <li>设立<strong>三级标识体系</strong>：基础级（一星）—满足国标基本安全要求（无弱口令、漏洞管理机制、软件更新）；增强级（二星）—达到同类产品先进水平；领先级（三星）—能抵御高级别网络攻击，需通过第三方渗透测试</li>
-          <li>采用<strong>自愿参与原则</strong>，10个工作日内完成形式审查</li>
-          <li>涉及AI硬件、智能终端、IoT设备等联网产品</li>
-        </ul>
-        <h4 style="margin-top:16px;font-size:0.95em;">🔄 与前政策对比：</h4>
-        <ul class="policy-points">
-          <li><span class="highlight-new">新增</span>：首次建立面向联网产品的统一网络安全标识认证体系</li>
-          <li><span class="highlight-new">新增</span>：三级分级评定机制（基础→增强→领先）</li>
-          <li><span class="highlight-changed">变化</span>：从传统的"合规检查"转向"标识公示"的市场化激励模式</li>
-          <li>关联政策：与《网络安全法》《数据安全法》形成互补，强化产品安全溯源</li>
-        </ul>
-        <a class="source-link" href="https://www.gov.cn/zhengce/zhengceku/202604/content_7065212.htm" target="_blank">📎 查看政策全文 — 中国政府网</a>
+    <div class="timeline-item">
+      <div class="timeline-date">7月15日</div>
+      <div class="timeline-content">
+        <h4>《人工智能拟人化互动服务管理暂行办法》正式施行</h4>
+        <p>五部门联合发布，全球首部AI拟人化互动服务专项法规</p>
       </div>
     </div>
-
-    <!-- Policy 2 -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">《人工智能拟人化互动服务管理暂行办法》（五部门令第21号）</div>
-        <div><span class="badge badge-upcoming">⏳ 7月15日生效</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">网信办·发改委·工信部·公安部·市场监管总局</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年4月10日公布，2026年7月15日施行</td></tr>
-          <tr><th>发布单位</th><td>国家互联网信息办公室、国家发展改革委、工业和信息化部、公安部、国家市场监督管理总局</td></tr>
-          <tr><th>监督/执行单位</th><td>国家网信办统筹协调；省级网信部门负责安全评估和年度审查；发改、工信、公安、市场监管、新闻出版等部门依职责监管</td></tr>
-          <tr><th>文号</th><td>五部门令第21号</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求：</h4>
-        <ul class="policy-points">
-          <li><strong>适用范围</strong>：利用AI技术向境内公众提供模拟自然人人格特征的持续性情感互动服务（情感照护、陪伴、支持等），不适用于智能客服、知识问答等工作助手</li>
-          <li><strong>三条红线</strong>（第八条）：不得过度迎合/诱导情感依赖或沉迷；不得通过情感操纵诱导不合理决策；不得向未成年人生成影响身心健康的内容</li>
-          <li><strong>安全评估义务</strong>：上线前须开展安全评估并向省级网信部门提交报告（注册用户100万+或月活10万+等情形必须评估）</li>
-          <li><strong>算法备案义务</strong>：按《互联网信息服务算法推荐管理规定》完成备案及年度核验</li>
-          <li><strong>未成年人保护</strong>：全年龄段禁止使用虚拟亲密陪伴类AI服务；14周岁以下无监护人授权禁止使用拟人情感交互功能；连续使用超2小时须弹窗提醒</li>
-          <li><strong>训练数据管理</strong>（第十一条）：数据合法来源、清洗标注、多样性增强、合成数据安全评估</li>
-          <li><strong>违规处罚</strong>（第三十条）：警告→责令改正→停服+1万-10万元罚款；危害生命健康安全并处10万-20万元罚款</li>
-        </ul>
-        <h4 style="margin-top:16px;font-size:0.95em;">🔄 与前政策对比：</h4>
-        <ul class="policy-points">
-          <li><span class="highlight-new">新增</span>：中国首部专门针对AI拟人化情感交互场景的立法</li>
-          <li><span class="highlight-new">新增</span>：明确"情感操纵""情感依赖"等概念的监管框架</li>
-          <li><span class="highlight-new">新增</span>：2小时使用时限弹窗提醒机制</li>
-          <li><span class="highlight-changed">变化</span>：相较于《生成式AI服务管理暂行办法》，本法规针对更细分的垂直场景，监管颗粒度更细</li>
-          <li><span class="highlight-changed">变化</span>：处罚力度低于《网络安全法》（最高罚500万），体现"先行先试、逐步完善"的立法思路</li>
-        </ul>
-        <a class="source-link" href="https://www.gov.cn/gongbao/2026/issue_12806/202606/content_7072472.html" target="_blank">📎 查看政策全文 — 国务院公报</a>
+    <div class="timeline-item">
+      <div class="timeline-date">7月17日</div>
+      <div class="timeline-content">
+        <h4>《人工智能合作发展行动计划》</h4>
+        <p>国家发改委在WAIC大会发布，提出八大全球合作行动</p>
       </div>
     </div>
-
-    <!-- Policy 3 -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">《关于加快"人工智能+消费"发展的实施意见》（商建发2026年第89号）</div>
-        <div><span class="badge" style="background:#e0e7ff;color:#3730a3;">📋 6月发布·7月推进</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">商务部·网信办·发改委·教育部·工信部·民政部·住建部·文旅部</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年6月9日</td></tr>
-          <tr><th>发布单位</th><td>商务部、中央网信办、国家发展改革委、教育部、工业和信息化部、民政部、住房城乡建设部、文化和旅游部</td></tr>
-          <tr><th>监督/执行单位</th><td>商务部会同有关部门建立工作机制统筹协调；各地相关部门因地制宜落实</td></tr>
-          <tr><th>文号</th><td>商建发2026年第89号</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求：</h4>
-        <ul class="policy-points">
-          <li><strong>六大方向</strong>：（一）增加AI产品新供给（手机、电脑、电视、穿戴、网联汽车、AR/VR/MR）；（二）促进AI机器人消费（人形机器人、养老/陪伴机器人）；（三）AI+居家服务/养老/文旅/住宿餐饮/教育；（四）AI+批发零售/电商/物流；（五）建设"AI+消费"集聚区和创新场景；（六）加大财政支持、完善基础设施、健全标准体系、筑牢安全防线</li>
-          <li>17项具体条款，涉及消费全链条AI赋能</li>
-          <li>发挥国家人工智能产业投资基金作用</li>
-          <li>建立人工智能终端智能化分级标准与评估体系</li>
-        </ul>
-        <h4 style="margin-top:16px;font-size:0.95em;">🔄 与前政策对比：</h4>
-        <ul class="policy-points">
-          <li><span class="highlight-new">新增</span>：首次以"AI+消费"为核心主题的跨部门联合政策，覆盖8个部委</li>
-          <li><span class="highlight-new">新增</span>：明确提出AI终端智能化分级标准与评估体系建设</li>
-          <li><span class="highlight-changed">变化</span>：从"AI+制造"等供给侧重点转向消费端应用场景拓展</li>
-          <li>关联政策：承接2025年政府工作报告"人工智能+"行动部署</li>
-        </ul>
-        <a class="source-link" href="https://www.gov.cn/zhengce/zhengceku/202606/content_7072672.htm" target="_blank">📎 查看政策全文 — 中国政府网</a>
+    <div class="timeline-item">
+      <div class="timeline-date">7月17日</div>
+      <div class="timeline-content">
+        <h4>《上海市进一步推动AI+制造发展的若干措施》</h4>
+        <p>上海发布13条新政，最高单项目补贴4000万元</p>
       </div>
     </div>
-
-    <!-- Policy 4 (Related national) -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">《人工智能科技伦理审查与服务办法（试行）》（工信部联科〔2026〕75号）</div>
-        <div><span class="badge" style="background:#e0e7ff;color:#3730a3;">📋 4月发布·持续推进</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">工信部等十部门</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年3月30日成文，4月2日发布</td></tr>
-          <tr><th>发布单位</th><td>工信部、发改委、教育部、科技部、农业农村部、卫健委、网信办、央行、中科院、科协</td></tr>
-          <tr><th>监督/执行单位</th><td>工信部牵头实施先导计划；在AI国家先导区所在省份实施</td></tr>
-          <tr><th>文号</th><td>工信部联科〔2026〕75号</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求：</h4>
-        <ul class="policy-points">
-          <li>规范AI科技活动伦理治理，审查训练数据选择标准、算法模型系统设计合理性</li>
-          <li>要求防止偏见歧视、算法压榨，合理披露算法用途、运行逻辑、潜在风险</li>
-          <li>设立"服务与促进"专章：标准建设、促进服务、鼓励创新、宣传教育、人才培养</li>
-          <li>在北京、上海、广东、山东等10个AI先导区省份实施先导计划</li>
-        </ul>
-        <a class="source-link" href="https://www.gov.cn/zhengce/zhengceku/202604/content_7064646.htm" target="_blank">📎 查看政策全文 — 中国政府网</a>
-        &nbsp;
-        <a class="source-link" href="https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_353d0d2a06ab4cebbfd53f97aec4ae24.html" target="_blank">📎 先导计划实施通知 — 工信部</a>
-      </div>
-    </div>
-
-    <!-- Policy 5 (National - 智能体) -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">《智能体规范应用与创新发展实施意见》</div>
-        <div><span class="badge" style="background:#e0e7ff;color:#3730a3;">📋 5月发布·持续推进</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">网信办·发改委·工信部</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年5月8日</td></tr>
-          <tr><th>发布单位</th><td>国家网信办、国家发展改革委、工业和信息化部</td></tr>
-          <tr><th>监督/执行单位</th><td>网信办统筹，发改委、工信部协同</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求：</h4>
-        <ul class="policy-points">
-          <li>基本原则：安全可控、规范有序、创新驱动、应用牵引</li>
-          <li>四大举措：夯实发展基础（技术底座、标准协议）、守牢安全底线（产品准则、治理体系）、强化应用牵引（19个典型应用场景）、建设创新生态（产业合作、应用推广）</li>
-          <li>覆盖智能体全生命周期管理</li>
-        </ul>
-        <a class="source-link" href="https://m.sohu.com/a/1040240804_120685946/" target="_blank">📎 政策解读 — 搜狐</a>
-      </div>
-    </div>
-
-    <!-- Local Policy -->
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">📍</span> 本月地方政策详情</h2>
-
-    <div class="card level-local">
-      <div class="card-header">
-        <div class="card-title">《北京市加快推进人工智能赋能科学研究实施方案（2026-2028年）》</div>
-        <div><span class="badge badge-effective">✅ 7月正式公布</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-local">地方级 · 北京</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">北京市委教育科技人才工作领导小组</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年6月30日成文，7月1-2日正式公布</td></tr>
-          <tr><th>发布单位</th><td>中共北京市委教育科技人才工作领导小组</td></tr>
-          <tr><th>监督/执行单位</th><td>市科委中关村管委会牵头，市人才局、发改委、教委、经信局、卫健委、国资委、政务和数据局、各相关区协同</td></tr>
-        </table>
-        <h4 style="margin-top:16px;font-size:0.95em;">📋 政策详细要求（18条）：</h4>
-        <ul class="policy-points">
-          <li><strong>工作目标</strong>：到2028年建成辐射全球的科学智能创新中枢</li>
-          <li><strong>自主实验室体系建设</strong>：建设高度智能化新型实验平台（AI+具身机器人+高通量仪器），出台建设标准，开展分级评估</li>
-          <li><strong>六大标杆场景</strong>：高能物理前沿探索、材料科学研发制备、医疗健康诊疗（含新药创制智能体）、生命科学机理探索、量子科技融合创新、生物育种研究效能</li>
-          <li><strong>科学模型体系</strong>：迭代升级通用科学基础大模型，打造学科领域专业计算模型</li>
-          <li><strong>科学数据基础</strong>：推进北京科学数据中心建设，打造智能数据加工与数据集体系</li>
-          <li><strong>资金支持</strong>：市级固定资产投资、首都科技创新券、地方政府专项债、算力补贴等</li>
-        </ul>
-        <h4 style="margin-top:16px;font-size:0.95em;">🔄 与前政策对比：</h4>
-        <ul class="policy-points">
-          <li><span class="highlight-new">新增</span>：全国首个省级"AI+科学研究"专项实施方案</li>
-          <li><span class="highlight-new">新增</span>：首次提出"自主实验室"概念及建设标准</li>
-          <li><span class="highlight-new">新增</span>：科学智能专属算力集群布局</li>
-          <li><span class="highlight-changed">变化</span>：从通用AI产业发展转向垂直科学场景（AI for Science）</li>
-          <li>关联政策：承接国务院"人工智能+"行动，与2026世界人工智能大会（7月17-20日上海）形成呼应</li>
-        </ul>
-        <a class="source-link" href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202607/t20260702_4743249.html" target="_blank">📎 查看政策全文 — 北京市政府</a>
-        &nbsp;
-        <a class="source-link" href="https://m.thepaper.cn/newsDetail_forward_33537971" target="_blank">📎 澎湃新闻报道</a>
-      </div>
-    </div>
-
-    <!-- Additional related -->
-    <div class="card level-national">
-      <div class="card-header">
-        <div class="card-title">📋 "清朗·整治AI应用乱象"专项行动（2026年4月启动）</div>
-        <div><span class="badge badge-today">🔴 进行中</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-national">国家级</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">中央网信办</span>
-      </div>
-      <div class="card-body">
-        <p>中央网信办自2026年4月部署开展为期4个月的专项行动，分两个阶段推进，聚焦14类突出问题。</p>
-        <ul class="policy-points">
-          <li><strong>第一阶段成果（截至7月6日）</strong>：处置违规AI产品1.4万余款，清理违法违规信息600余万条，处置账号2.6万余个</li>
-          <li>首要整治重点："未按规定履行大模型备案登记义务"（应备未备）</li>
-          <li>同步聚焦：AI平台安全过滤能力不足、训练语料安全、AI数据投毒、生成合成内容标识不到位</li>
-          <li><strong>监管重心转变</strong>：从"引导备案"转向"执法处罚"</li>
-          <li>各大应用分发平台（华为、小米、苹果App Store等）全面收紧审核</li>
-          <li>2026年新增备案要求：模型版本管理机制说明、水印溯源方案、未成年人保护条款</li>
-        </ul>
-        <a class="source-link" href="http://society.people.com.cn/n1/2026/0706/c1008-40754457.html" target="_blank">📎 来源：人民网</a>
-        &nbsp;
-        <a class="source-link" href="https://www.moyunqifu.com/zzfw/14680.html" target="_blank">📎 详细解读</a>
+    <div class="timeline-item">
+      <div class="timeline-date">7月17日</div>
+      <div class="timeline-content">
+        <h4>《北京人工智能创新高地建设行动计划》</h4>
+        <p>北京提出两年内AI核心产业规模破万亿</p>
       </div>
     </div>
   </div>
 
-  <!-- ==================== 国外政策 ==================== -->
-  <div id="international" class="section">
-    <div class="stats-grid" style="margin-top:24px;">
-      <div class="stat-card"><div class="stat-number">9</div><div class="stat-label">本月追踪政策</div></div>
-      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">涉及国家/地区</div></div>
-      <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">7月生效法规</div></div>
-      <div class="stat-card"><div class="stat-number">1</div><div class="stat-label">今日发布政策</div></div>
-    </div>
-
-    <h2 class="section-title"><span class="icon">📅</span> 今日政策发布时间线</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot today"></div>
-        <div class="timeline-date">2026年7月8日 · 今天</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇪🇺 欧盟委员会公布AI网络安全计划</div>
-          <div class="tl-desc">Brussels AI Cybersecurity Plan — 应对AI带来的网络安全挑战，建立AI增强网络安全框架。</div>
-          <div class="tl-source"><a class="source-link" href="https://usagevpn.com/my-europe/brussels-pitches-ai-cybersecurity-plan-amid-dependence-on-us-models/" target="_blank">来源：详细报道</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月7日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇺🇸 FTC AI准确性抑制政策声明刊载于联邦公报</div>
-          <div class="tl-desc">公众评论期至7月31日，挑战州级AI法规。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.federalregister.gov/documents/2026/07/07/2026-13628/policy-statement-concerning-the-suppression-of-accuracy-in-artificial-intelligence-systems" target="_blank">来源：Federal Register</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月7日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇰🇷 韩国国土交通部公布AI欺诈检测计划</div>
-          <div class="tl-desc">使用AI技术打击货运车辆燃油补贴欺诈。</div>
-          <div class="tl-source"><a class="source-link" href="https://evrimagaci.org/gpt/south-korea-unveils-ai-crackdown-on-fuel-subsidy-fraud-542272" target="_blank">来源：详细报道</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月1日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇺🇸 FTC发布AI准确性抑制政策声明（征求意见稿）</div>
-          <div class="tl-desc">AI公司若为未披露的意识形态目标扭曲输出，可能构成欺骗性商业行为。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.ftc.gov/policy/public-comments/policy-statement-concerning-suppression-accuracy-artificial-intelligence-systems-0" target="_blank">来源：FTC</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月1日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇺🇳 联合国发布2026年国际AI安全报告</div>
-          <div class="tl-desc">揭示AI在生物研究等领域能力发展快于治理框架的"危险差距"。</div>
-          <div class="tl-source"><a class="source-link" href="https://www.techuk.org/resource/the-release-of-the-international-ai-safety-report-2026-navigating-rapid-ai-advancement-and-emerging-risks.html" target="_blank">来源：techUK</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月（预计）</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇪🇺 欧洲议会和理事会正式投票采纳AI法案数字全法案修正案</div>
-          <div class="tl-desc">高风险AI系统合规截止延期至2027年12月，新增禁止AI实践。</div>
-          <div class="tl-source"><a class="source-link" href="https://ec.europa.eu/commission/presscorner/detail/en/mex_26_1030" target="_blank">来源：欧盟委员会</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot july"></div>
-        <div class="timeline-date">2026年7月</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇺🇸 缅因州和弗吉尼亚州AI法案生效</div>
-          <div class="tl-desc">两州颁布就业领域AI披露法律，要求雇主在AI参与重大就业决策时通知候选人和员工。</div>
-          <div class="tl-source"><a class="source-link" href="https://aibuzz.blog/ai-regulation-in-2026/" target="_blank">来源：AI Buzz</a></div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot upcoming"></div>
-        <div class="timeline-date">2026年8月2日</div>
-        <div class="timeline-content">
-          <div class="tl-title">🇪🇺 EU AI Act第50条透明度义务生效</div>
-          <div class="tl-desc">AI生成内容披露义务正式生效，GPAI模型罚款执行开始。</div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">🌍</span> 本月国外政策详情</h2>
-
-    <!-- Intl Policy 1 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇪🇺 欧盟委员会AI网络安全计划（Brussels AI Cybersecurity Plan）</div>
-        <div><span class="badge badge-today">🔴 今日发布</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">欧盟</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">欧盟委员会</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年7月8日</td></tr>
-          <tr><th>发布国家/地区</th><td>欧盟（布鲁塞尔）</td></tr>
-          <tr><th>发布机构</th><td>欧盟委员会，数字事务专员 Henna Virkkunen</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li>应对AI带来的日益增长的网络安全挑战，先进AI模型可在数小时内识别利用漏洞（传统方法需数天至数周）</li>
-          <li>通过"Project Glasswing"项目获得Anthropic公司Mythos模型受限访问权</li>
-          <li>建立结构化框架，使欧盟公私部门获得增强网络安全功能的AI模型</li>
-          <li>制定AI驱动网络攻击的防御指南和关键基础设施准备度评估框架</li>
-          <li>承认欧盟对美国AI技术的依赖（模型及基础设施）</li>
-        </ul>
-        <a class="source-link" href="https://usagevpn.com/my-europe/brussels-pitches-ai-cybersecurity-plan-amid-dependence-on-us-models/" target="_blank">📎 查看详细报道</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 2 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇺🇸 FTC《关于AI系统准确性抑制的政策声明》</div>
-        <div><span class="badge badge-upcoming">⏳ 评论期至7月31日</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">美国</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">联邦贸易委员会（FTC）</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年7月1日投票通过，7月7日刊载于联邦公报</td></tr>
-          <tr><th>发布国家</th><td>美国</td></tr>
-          <tr><th>发布机构</th><td>联邦贸易委员会（FTC）</td></tr>
-          <tr><th>文件编号</th><td>FTC-2026-0859; Federal Register No. 2026-13628</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li><strong>核心声明</strong>：AI公司若为未披露的意识形态目标扭曲系统输出，可能构成FTC法案第5条下欺骗性商业行为</li>
-          <li><strong>消费者合理预期</strong>：AI系统应以真实准确输出为目标</li>
-          <li><strong>挑战州级法规</strong>：指出科罗拉多州修订后的AI法案可能迫使AI公司生成虚假结果</li>
-          <li><strong>联邦优先权信号</strong>：主张建立"最小负担的国家AI政策框架——而非50个各自为政的州级框架"</li>
-          <li>公众评论期：2026年7月6日至7月31日</li>
-        </ul>
-        <a class="source-link" href="https://www.ftc.gov/policy/public-comments/policy-statement-concerning-suppression-accuracy-artificial-intelligence-systems-0" target="_blank">📎 FTC官方公告</a>
-        &nbsp;
-        <a class="source-link" href="https://www.federalregister.gov/documents/2026/07/07/2026-13628/policy-statement-concerning-the-suppression-of-accuracy-in-artificial-intelligence-systems" target="_blank">📎 联邦公报全文</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 3 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇺🇳 联合国2026年国际AI安全报告</div>
-        <div><span class="badge badge-effective">✅ 7月1日发布</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">联合国</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">ITU · Doreen Bogdan-Martin</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年7月1日</td></tr>
-          <tr><th>发布机构</th><td>联合国数字技术机构（ITU）</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li>先进AI同时带来变革性机遇和日益升级的危险</li>
-          <li>AI在生物研究等领域的能力发展快于治理框架，造成"危险差距"</li>
-          <li>技术基准测试显示AI系统在设计生物武器方面已达到或超过专家水平</li>
-          <li>世界经济论坛将AI不良后果列为第五大全球关键风险</li>
-          <li>一些模型能区分评估和部署环境从而改变行为，使安全测试复杂化</li>
-          <li>呼吁建立紧急国际框架，自愿合规标准可能让位于强制性治理结构</li>
-        </ul>
-        <a class="source-link" href="https://www.techuk.org/resource/the-release-of-the-international-ai-safety-report-2026-navigating-rapid-ai-advancement-and-emerging-risks.html" target="_blank">📎 techUK详细解读</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 4 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇪🇺 欧盟《数字全法案》AI规则简化修正案</div>
-        <div><span class="badge badge-upcoming">⏳ 7月正式采纳</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">欧盟</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">欧盟委员会·欧洲议会·欧盟理事会</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>5月7日达成政治协议，7月正式采纳</td></tr>
-          <tr><th>发布国家/地区</th><td>欧盟</td></tr>
-          <tr><th>发布机构</th><td>欧盟委员会、欧洲议会、欧盟理事会</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li><strong>高风险AI系统时限推迟</strong>：独立高风险AI系统从2026年8月2日延至2027年12月2日；嵌入式AI延至2028年8月2日</li>
-          <li><strong>新增禁止AI实践</strong>：未经同意生成操控可识别人物真实亲密内容的AI系统被禁止（2026年12月2日起生效）</li>
-          <li><strong>透明度义务调整</strong>：2026年8月2日前已上市AI系统需在12月2日前完成合成内容技术标记</li>
-          <li><strong>SME扩展</strong>：中小企业特权扩展至小型中等市值企业（≤3000人、≤15亿欧元营业额）</li>
-          <li><strong>AI办公室执法权加强</strong>：明确AI办公室与各国监管当局的职责划分</li>
-          <li>2026年8月2日仍确认生效：第50条透明度义务、GPAI模型罚款执行</li>
-        </ul>
-        <a class="source-link" href="https://ec.europa.eu/commission/presscorner/detail/en/mex_26_1030" target="_blank">📎 欧盟委员会公告</a>
-        &nbsp;
-        <a class="source-link" href="https://www.eh.at/en/the-digital-omnibus-on-ai-has-arrived-new-timelines-less-duplication-more-clarity/" target="_blank">📎 详细解读</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 5 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇺🇸 特朗普总统《促进先进人工智能创新与安全》行政命令（EO 14409）</div>
-        <div><span class="badge" style="background:#e0e7ff;color:#3730a3;">📋 6月发布</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">美国</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">白宫</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年6月2日签署，6月5日发布</td></tr>
-          <tr><th>发布国家</th><td>美国</td></tr>
-          <tr><th>发布机构</th><td>白宫（总统特朗普签署）</td></tr>
-          <tr><th>文号</th><td>EO 14409</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li><strong>核心定位</strong>：以"美国优先"策略推动AI创新与安全，不通过过度繁重监管扼杀创新</li>
-          <li><strong>升级联邦AI系统（30天内）</strong>：国家安全系统优先网络防御；CISA发布行动指令</li>
-          <li><strong>AI网络安全信息交换中心</strong>：财政部牵头建立，协调软件漏洞扫描与修补</li>
-          <li><strong>前沿模型安全部署框架（60天内）</strong>：机密基准测试流程、自愿框架、明确禁止强制许可/预审批</li>
-          <li><strong>刑事执法</strong>：司法部优先起诉利用AI非法访问计算机的行为</li>
-        </ul>
-        <a class="source-link" href="https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security" target="_blank">📎 联邦公报全文</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 6 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇺🇸 缅因州和弗吉尼亚州AI法案</div>
-        <div><span class="badge badge-effective">✅ 7月生效</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">美国（州级）</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>生效时间</th><td>2026年7月</td></tr>
-          <tr><th>发布国家</th><td>美国（缅因州、弗吉尼亚州）</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li>要求雇主在AI参与重大就业决策时通知候选人和员工</li>
-          <li>提供请求人工审查AI辅助决策的权利</li>
-          <li>弗吉尼亚州额外禁止某些完全自动化的最终决策</li>
-          <li>范围较科罗拉多州综合框架更窄，聚焦就业AI披露</li>
-        </ul>
-        <a class="source-link" href="https://aibuzz.blog/ai-regulation-in-2026/" target="_blank">📎 AI监管2026概览</a>
-      </div>
-    </div>
-
-    <!-- Intl Policy 7 -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🇰🇷 韩国AI打击燃油补贴欺诈行动计划</div>
-        <div><span class="badge badge-effective">✅ 7月7日公布</span></div>
-      </div>
-      <div class="card-meta">
-        <span class="badge badge-international">韩国</span>
-        <span class="badge" style="background:#f1f5f9;color:#475569;">国土交通部（MOLIT）</span>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>发布时间</th><td>2026年7月7日</td></tr>
-          <tr><th>发布国家</th><td>韩国</td></tr>
-          <tr><th>发布机构</th><td>韩国国土交通部（MOLIT）</td></tr>
-        </table>
-        <ul class="policy-points">
-          <li>使用AI技术、增加检查力度和更严厉处罚打击货运车辆燃油补贴欺诈</li>
-          <li>约43万辆货运车辆每年获1.27万亿韩元补贴，2025年发现731起欺诈案件</li>
-          <li>将实施AI欺诈检测系统</li>
-        </ul>
-        <a class="source-link" href="https://evrimagaci.org/gpt/south-korea-unveils-ai-crackdown-on-fuel-subsidy-fraud-542272" target="_blank">📎 详细报道</a>
-      </div>
-    </div>
-
-    <!-- Global Overview -->
-    <div class="card level-international">
-      <div class="card-header">
-        <div class="card-title">🌐 全球其他地区AI监管现状（2026年7月）</div>
-      </div>
-      <div class="card-body">
-        <table class="detail-table">
-          <tr><th>国家/地区</th><th>监管方式</th><th>最新动态</th></tr>
-          <tr><td>🇯🇵 日本</td><td>软治理（行业自律+指导方针）</td><td>无硬性AI立法，依赖行业自律</td></tr>
-          <tr><td>🇸🇬 新加坡</td><td>行业指南+PDPA法律基础</td><td>《模型AI治理框架》+AI Verify测试工具包</td></tr>
-          <tr><td>🇬🇧 英国</td><td>模型评估方式</td><td>UK AI Security Institute进行模型评估</td></tr>
-          <tr><td>🇹🇼 台湾</td><td>立法</td><td>《AI基本法》2026年1月生效</td></tr>
-          <tr><td>🇰🇷 韩国</td><td>立法</td><td>《AI基本法》2026年1月22日生效，域外适用效力</td></tr>
-        </table>
-        <a class="source-link" href="https://www.meta-intelligence.tech/en/insight-ai-regulations-global" target="_blank">📎 全球AI监管概览</a>
-        &nbsp;
-        <a class="source-link" href="https://www.onetrust.com/content/dam/onetrust/brand/content/asset/white-paper/ot-governing-ai-in-2026-white-paper/ot-governing-ai-in-2026-white-paper.pdf" target="_blank">📎 OneTrust 2026年AI治理白皮书</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== 数据分析 ==================== -->
-  <div id="analysis" class="section">
-    <h2 class="section-title"><span class="icon">📊</span> 政策数据可视化分析</h2>
-
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-title">📈 本月政策发布时间分布</div>
-        <div class="chart-container"><canvas id="chartTimeline" height="280"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">🌍 政策按国家/地区分布</div>
-        <div class="chart-container"><canvas id="chartRegion" height="280"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">🏷️ 政策主题分类占比</div>
-        <div class="chart-container"><canvas id="chartCategory" height="280"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">📊 中美欧监管力度对比</div>
-        <div class="chart-container"><canvas id="chartComparison" height="280"></canvas></div>
-      </div>
-      <div class="chart-card full-width">
-        <div class="chart-title">📉 AI政策监管趋势变化（2024-2026）</div>
-        <div class="chart-container"><canvas id="chartTrend" height="300"></canvas></div>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">🔥</span> 政策关键词与热点频率</h2>
-    <div class="keywords-cloud">
-      <span class="keyword-tag hot" title="出现频率最高">AI安全治理</span>
-      <span class="keyword-tag hot" title="出现频率最高">生成式AI</span>
-      <span class="keyword-tag hot" title="出现频率最高">算法备案</span>
-      <span class="keyword-tag warm">深度合成</span>
-      <span class="keyword-tag warm">内容标识</span>
-      <span class="keyword-tag warm">数据要素</span>
-      <span class="keyword-tag warm">网络安全</span>
-      <span class="keyword-tag warm">伦理审查</span>
-      <span class="keyword-tag warm">未成年人保护</span>
-      <span class="keyword-tag medium">AI+消费</span>
-      <span class="keyword-tag medium">AI for Science</span>
-      <span class="keyword-tag medium">拟人化交互</span>
-      <span class="keyword-tag medium">情感AI监管</span>
-      <span class="keyword-tag medium">AI立法</span>
-      <span class="keyword-tag medium">算力集群</span>
-      <span class="keyword-tag medium">前沿模型</span>
-      <span class="keyword-tag medium">联邦优先权</span>
-      <span class="keyword-tag medium">高风险AI</span>
-      <span class="keyword-tag cool">数字水印</span>
-      <span class="keyword-tag cool">AI拟人化</span>
-      <span class="keyword-tag cool">智能体</span>
-      <span class="keyword-tag cool">生物安全</span>
-      <span class="keyword-tag cool">AI+制造</span>
-      <span class="keyword-tag cool">AI网络安全</span>
-      <span class="keyword-tag cool">就业AI</span>
-      <span class="keyword-tag cool">AI投资</span>
-      <span class="keyword-tag cool">SME特权</span>
-      <span class="keyword-tag cool">技术标记</span>
-    </div>
-
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">📋</span> 同类政策要求变化趋势</h2>
-    <table class="comparison-table">
+  <div class="card">
+    <h2><span class="icon">📋</span> 本月国内政策详细列表</h2>
+    <div style="overflow-x:auto">
+    <table>
       <thead>
-        <tr>
-          <th>政策维度</th>
-          <th>2024年状态</th>
-          <th>2025年变化</th>
-          <th>2026年7月最新</th>
-          <th>趋势</th>
-        </tr>
+        <tr><th>发布日期</th><th>政策名称</th><th>发布单位</th><th>政策类型</th><th>核心要求</th><th>数据来源</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>生成式AI备案</strong></td>
-          <td>《生成式AI管理暂行办法》实施，备案机制初步建立</td>
-          <td>备案数量快速增长，监管框架细化</td>
-          <td><strong>868款完成备案</strong>，监管重心从"引导备案"转向"执法处罚"，应用商店全面收紧审核</td>
-          <td><span class="trend-up">⬆ 显著收紧</span></td>
+          <td>2026-07-06</td>
+          <td>《人工智能+信息通信创新发展实施意见(2026—2028年)》</td>
+          <td>工业和信息化部</td>
+          <td><span class="tag tag-ministry">部委政策</span></td>
+          <td>推动AI与信息通信业深度融合，明确2026-2028年发展路径，加强网络基础设施智能化升级</td>
+          <td><a class="source-link" href="https://www.gov.cn/zhengce/zhengceku/202606/content_7071755.htm" target="_blank">查看原文 ↗</a></td>
         </tr>
         <tr>
-          <td><strong>AI安全评估</strong></td>
-          <td>基础安全要求提出</td>
-          <td>TC260标准逐步完善</td>
-          <td>十部门伦理审查办法+安全评估体系；国务院部署动态适应、分级分类安全监管</td>
-          <td><span class="trend-up">⬆ 体系化增强</span></td>
+          <td>2026-07-15</td>
+          <td>《人工智能拟人化互动服务管理暂行办法》</td>
+          <td>网信办、发改委、工信部、公安部、市场监管总局</td>
+          <td><span class="tag tag-law">法规施行</span></td>
+          <td>全球首部AI拟人化互动服务专项法规，禁止AI情感操纵，要求明确标识AI身份，保护用户权益</td>
+          <td><a class="source-link" href="http://news.qq.com/rain/a/20260422A088NE00" target="_blank">查看原文 ↗</a></td>
         </tr>
         <tr>
-          <td><strong>内容标识/水印</strong></td>
-          <td>原则性要求</td>
-          <td>技术标准推进中</td>
-          <td>数字水印+内容凭证强制嵌入，清朗专项行动重点整治标识落实不到位</td>
-          <td><span class="trend-up">⬆ 强制执行</span></td>
+          <td>2026-07-17</td>
+          <td>《人工智能合作发展行动计划》</td>
+          <td>国家发展和改革委员会</td>
+          <td><span class="tag tag-national">国家级行动</span></td>
+          <td>八大行动：数据共享、智能算力、开源生态、深度赋能、数智人才、规则对接、协同治理、AI向善</td>
+          <td><a class="source-link" href="https://www.ndrc.gov.cn/fggz/202607/t20260717_1406573_ext.html" target="_blank">查看原文 ↗</a></td>
         </tr>
         <tr>
-          <td><strong>AI拟人化/情感交互</strong></td>
-          <td>无专项监管</td>
-          <td>关注AI伦理风险</td>
-          <td><span class="highlight-new">首次专项立法</span>，7月15日施行，三条红线+未成年人保护+2小时时限</td>
-          <td><span class="trend-up">⬆ 从无到有</span></td>
+          <td>2026-07-17</td>
+          <td>《上海市进一步推动AI+制造发展的若干措施》</td>
+          <td>上海市经济和信息化委员会</td>
+          <td><span class="tag tag-local">地方政策</span></td>
+          <td>13条措施，工业垂类大模型最高支持2000万元，工业AI安全方案最高1000万元，算力补贴最高4000万元</td>
+          <td><a class="source-link" href="http://www.sheitc.sh.gov.cn/cyfz/20260717/7986191fa75f49a698259f01c829df52.html" target="_blank">查看原文 ↗</a></td>
         </tr>
         <tr>
-          <td><strong>欧盟AI法案</strong></td>
-          <td>法案通过（2024年6月）</td>
-          <td>实施准备期，GPAI规则先行</td>
-          <td>高风险AI合规大幅推迟（延至2027/2028），新增禁止AI实践，SME特权扩大</td>
-          <td><span class="trend-down">⬇ 延期放松</span></td>
+          <td>2026-07-17</td>
+          <td>《北京人工智能创新高地建设行动计划》</td>
+          <td>北京市经济和信息化局</td>
+          <td><span class="tag tag-local">地方政策</span></td>
+          <td>两年内AI核心产业规模破万亿，完善算力供给、数据建设、中试服务体系</td>
+          <td><a class="source-link" href="http://finance.sina.cn/2026-07-16/detail-inihyyvy4490505.d.html" target="_blank">查看原文 ↗</a></td>
         </tr>
         <tr>
-          <td><strong>美国联邦AI政策</strong></td>
-          <td>拜登EO侧重安全</td>
-          <td>特朗普取消拜登EO</td>
-          <td>新EO聚焦创新+安全平衡，禁止强制许可，FTC挑战州级法规（联邦优先权）</td>
-          <td><span class="trend-flat">⬅ 创新优先转向</span></td>
-        </tr>
-        <tr>
-          <td><strong>AI+产业融合</strong></td>
-          <td>"AI+"概念提出</td>
-          <td>多场景试点</td>
-          <td>AI+消费8部门联合推进；北京AI for Science专项方案；人形机器人纳入消费政策</td>
-          <td><span class="trend-up">⬆ 场景拓展</span></td>
-        </tr>
-        <tr>
-          <td><strong>数据要素/AI训练数据</strong></td>
-          <td>数据要素制度启动</td>
-          <td>数据交易所建设</td>
-          <td>首次提出词元交易模式，国家级数据集管理系统，六大专项行动赋能AI发展</td>
-          <td><span class="trend-up">⬆ 机制创新</span></td>
+          <td>2026-07月</td>
+          <td>"铸盾模都"2026年人工智能安全赋能专项行动</td>
+          <td>上海市通信管理局</td>
+          <td><span class="tag tag-ministry">部委行动</span></td>
+          <td>针对电信和互联网行业AI服务企业，加强网络和数据安全管理，落实AI安全主体责任</td>
+          <td><a class="source-link" href="http://shca.miit.gov.cn/zwgk/zcwj/wjfb/art/2026/art_4c0cd541aa774d1db8636113909a088d.html" target="_blank">查看原文 ↗</a></td>
         </tr>
       </tbody>
     </table>
+    </div>
+  </div>
 
-    <h2 class="section-title" style="margin-top:36px;"><span class="icon">🎯</span> 热点建设内容摘要</h2>
-    <div class="charts-grid">
-      <div class="chart-card full-width">
-        <div class="chart-title">热点建设内容关注度雷达图</div>
-        <div class="chart-container"><canvas id="chartRadar" height="400"></canvas></div>
+  <div class="card">
+    <h2><span class="icon">📊</span> 国内政策关键词与热频分析</h2>
+    <div class="two-col">
+      <div>
+        <img src="images/wordcloud_cn.png" alt="中文词云" class="chart-img">
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px;color:var(--primary)">热点关键词Top10</h3>
+        <table>
+          <thead><tr><th>排名</th><th>关键词</th><th>频次</th><th>趋势</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>人工智能</td><td>45</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>2</td><td>大模型</td><td>32</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>3</td><td>智能体</td><td>28</td><td style="color:#e74c3c">↑ 新热词</td></tr>
+            <tr><td>4</td><td>制造</td><td>25</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>5</td><td>数据</td><td>24</td><td style="color:#3498db">→ 持平</td></tr>
+            <tr><td>6</td><td>安全</td><td>22</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>7</td><td>算力</td><td>20</td><td style="color:#3498db">→ 持平</td></tr>
+            <tr><td>8</td><td>监管</td><td>18</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>9</td><td>开源</td><td>16</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>10</td><td>伦理</td><td>15</td><td style="color:#3498db">→ 持平</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-    <div style="margin-top:24px;">
-      <div class="card">
-        <h4 style="margin-bottom:12px;font-weight:700;">🎯 本月AI政策热点建设内容：</h4>
-        <ul class="policy-points">
-          <li><strong>🛡️ AI安全治理体系</strong> — 中美欧均在构建分级分类的AI安全监管框架，中国"动态适应、分级分类"成为关键词</li>
-          <li><strong>🤖 AI拟人化/情感交互监管</strong> — 全球首次专项立法在中国落地，情感AI成为独立监管赛道</li>
-          <li><strong>🏷️ 生成合成内容标识</strong> — 数字水印+内容凭证成为标配要求，执法力度显著增强</li>
-          <li><strong>🔐 网络安全+AI融合</strong> — 欧盟AI网络安全计划和中国网络安全标识管理办法同步推进</li>
-          <li><strong>📊 数据要素市场建设</strong> — 词元交易模式等创新机制首次提出，AI训练数据供给体系加速构建</li>
-          <li><strong>🔬 AI for Science</strong> — 北京引领科学智能创新，自主实验室+专属算力+大模型三管齐下</li>
-          <li><strong>🛒 AI+消费场景</strong> — 8部门联合推进消费端AI应用，人形机器人、智能终端成为重点</li>
-          <li><strong>⚖️ 联邦vs州权之争</strong> — 美国FTC试图确立联邦AI监管优先权，挑战各州独立立法趋势</li>
-          <li><strong>🌐 国际AI治理协作</strong> — 联合国日内瓦AI治理峰会密集召开，国际框架建设加速</li>
+  <div class="card">
+    <h2><span class="icon">🔍</span> 与前政策对比分析</h2>
+    <p style="margin-bottom:16px">与2026年上半年政策相比，7月国内AI政策呈现以下显著变化：</p>
+    <table>
+      <thead><tr><th>维度</th><th>前期政策特征</th><th>本月政策变化</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>政策层级</strong></td>
+          <td>以部委规章和地方试点为主</td>
+          <td>上升至国家级行动计划，发改委发布《人工智能合作发展行动计划》</td>
+        </tr>
+        <tr>
+          <td><strong>关注焦点</strong></td>
+          <td>侧重技术研发和基础设施</td>
+          <td>转向场景落地与产业赋能，"AI+制造"成为核心抓手</td>
+        </tr>
+        <tr>
+          <td><strong>监管重点</strong></td>
+          <td>通用型AI服务管理</td>
+          <td>细化至拟人化互动等具体场景，全球首部专项法规施行</td>
+        </tr>
+        <tr>
+          <td><strong>扶持方式</strong></td>
+          <td>普惠性补贴和税收优惠</td>
+          <td>精准化引导，上海单项目最高补贴4000万元，聚焦工业大模型和智能体</td>
+        </tr>
+        <tr>
+          <td><strong>国际合作</strong></td>
+          <td>以内循环为主</td>
+          <td>明确提出八大全球合作行动，共建开源生态和数智人才联合培养</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== FOREIGN SECTION ========== -->
+<div id="foreign" class="section">
+  <div class="summary-box">
+    <h3>国外政策摘要</h3>
+    <p>2026年7月，全球AI监管进入关键窗口期。美国参议院通过GAIN AI Act，限制对华AI芯片出口；欧盟AI Act透明度规则将于8月2日全面生效；韩国AI基本法合规审查正式启动。各国政策呈现"安全优先、出口管制、合规收紧"的显著趋势。</p>
+    <div class="keywords">
+      <span class="keyword hot">芯片出口管制</span>
+      <span class="keyword hot">GAIN AI Act</span>
+      <span class="keyword">EU AI Act</span>
+      <span class="keyword">透明度</span>
+      <span class="keyword">合规审查</span>
+      <span class="keyword">NDAA</span>
+      <span class="keyword">国家安全</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📅</span> 国外政策发布时间线</h2>
+    <img src="images/foreign_timeline.png" alt="国外政策时间线" class="chart-img">
+    <div class="timeline-item">
+      <div class="timeline-date">7月3日</div>
+      <div class="timeline-content">
+        <h4>GAIN AI Act获参议院通过（NDAA修正案）</h4>
+        <p>美国参议院67-31票通过，要求芯片制造商优先满足国内订单</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">7月7日</div>
+      <div class="timeline-content">
+        <h4>韩国AI基本法合规审查启动</h4>
+        <p>国家AI委员会确认高影响AI系统正式合规审查开始</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">7月14日</div>
+      <div class="timeline-content">
+        <h4>对华芯片出口限制法案纳入NDAA</h4>
+        <p>参议员Banks宣布限制对华AI芯片出口法案将加入参议院版FY2027 NDAA</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">7月15日</div>
+      <div class="timeline-content">
+        <h4>美国商务部透露新AI芯片出口规则</h4>
+        <p>商务部工业安全局副局长Kessler表示正在制定新的AI和半导体出口监管方法</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">7月19日</div>
+      <div class="timeline-content">
+        <h4>欧盟AI Act透明度截止日期指引更新</h4>
+        <p>Article 50透明度规则将于8月2日生效，违规罚款最高3500万欧元或全球营收7%</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">7月21日</div>
+      <div class="timeline-content">
+        <h4>韩国修订AI基本法部分条款生效</h4>
+        <p>公共部门AI使用规定正式生效，支持数据基础设施和专业人才培养</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> 本月国外政策详细列表</h2>
+    <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr><th>发布日期</th><th>政策/事件名称</th><th>发布国家/地区</th><th>发布单位</th><th>政策类型</th><th>核心要求</th><th>数据来源</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026-07-03</td>
+          <td>GAIN AI Act (Guaranteeing Access and Innovation for National AI Act)</td>
+          <td><span class="tag tag-us">美国</span></td>
+          <td>US Senate</td>
+          <td>联邦立法</td>
+          <td>要求AI和高性能芯片制造商优先满足美国国内订单后再出口；赋予国会否决最敏感芯片出口许可的权力</td>
+          <td><a class="source-link" href="https://tokention.com/senate-passes-gain-act-as-part-of-2026-national-defense-authorization-bill/" target="_blank">查看原文 ↗</a></td>
+        </tr>
+        <tr>
+          <td>2026-07-07</td>
+          <td>AI Basic Act Formal Compliance Reviews Begin</td>
+          <td><span class="tag tag-kr">韩国</span></td>
+          <td>National AI Committee</td>
+          <td>合规启动</td>
+          <td>高影响AI系统（就业、教育、金融、医疗）正式开始合规审查，要求透明度披露和影响评估</td>
+          <td><a class="source-link" href="https://cubbbix.com/blog/ai-regulation-july-2026-global-update/" target="_blank">查看原文 ↗</a></td>
+        </tr>
+        <tr>
+          <td>2026-07-14</td>
+          <td>AI Chip Export Restriction Bill (AI Overwatch Act)</td>
+          <td><span class="tag tag-us">美国</span></td>
+          <td>US Senate (Sen. Banks)</td>
+          <td>出口管制</td>
+          <td>限制对华AI芯片销售法案将纳入FY2027 NDAA；同时Match Act和Chip Security Act也纳入</td>
+          <td><a class="source-link" href="https://exportcompliancedaily.com/article/2026/07/15/bill-to-limit-chip-exports-takes-step-forward-in-senate-2607140080" target="_blank">查看原文 ↗</a></td>
+        </tr>
+        <tr>
+          <td>2026-07-15</td>
+          <td>Commerce Dept New AI & Semiconductor Export Rules</td>
+          <td><span class="tag tag-us">美国</span></td>
+          <td>US Commerce Department</td>
+          <td>出口管制</td>
+          <td>商务部工业安全局表示正在制定新的AI和半导体出口监管方法，未来将有具体监管行动</td>
+          <td><a class="source-link" href="https://usbusinessnews.com/commerce-us-ai-semiconductor-export-rules/" target="_blank">查看原文 ↗</a></td>
+        </tr>
+        <tr>
+          <td>2026-07-19</td>
+          <td>EU AI Act Transparency Deadline Guidance</td>
+          <td><span class="tag tag-eu">欧盟</span></td>
+          <td>European Commission</td>
+          <td>监管指引</td>
+          <td>Article 50透明度规则8月2日生效：AI系统须明确告知用户、深度伪造内容须标注、情感识别须披露</td>
+          <td><a class="source-link" href="https://neuralwired.com/2026/07/15/eu-ai-act-august-2026-deadline/" target="_blank">查看原文 ↗</a></td>
+        </tr>
+        <tr>
+          <td>2026-07-21</td>
+          <td>Revised AI Basic Act Provisions Effective</td>
+          <td><span class="tag tag-kr">韩国</span></td>
+          <td>South Korea Government</td>
+          <td>法规生效</td>
+          <td>公共部门AI使用规定生效，支持AI研发和数据基础设施建设，重组国家AI战略委员会</td>
+          <td><a class="source-link" href="https://m.ajupress.com/view/20260630142070850" target="_blank">查看原文 ↗</a></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📊</span> 国外政策关键词与热频分析</h2>
+    <div class="two-col">
+      <div>
+        <img src="images/keywords_en.png" alt="英文关键词" class="chart-img">
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px;color:var(--primary)">热点关键词Top10</h3>
+        <table>
+          <thead><tr><th>排名</th><th>关键词</th><th>频次</th><th>趋势</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>AI Regulation</td><td>38</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>2</td><td>Export Control</td><td>30</td><td style="color:#e74c3c">↑ 新热词</td></tr>
+            <tr><td>3</td><td>Chip</td><td>28</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>4</td><td>Transparency</td><td>25</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>5</td><td>Compliance</td><td>23</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>6</td><td>GPAI</td><td>20</td><td style="color:#3498db">→ 持平</td></tr>
+            <tr><td>7</td><td>NDAA</td><td>18</td><td style="color:#e74c3c">↑ 上升</td></tr>
+            <tr><td>8</td><td>High-Risk</td><td>16</td><td style="color:#3498db">→ 持平</td></tr>
+            <tr><td>9</td><td>Omnibus</td><td>14</td><td style="color:#e74c3c">↑ 新热词</td></tr>
+            <tr><td>10</td><td>Enforcement</td><td>14</td><td style="color:#e74c3c">↑ 上升</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🔍</span> 国外同类政策变化趋势分析</h2>
+    <table>
+      <thead><tr><th>维度</th><th>前期特征</th><th>本月变化</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>美国立法</strong></td>
+          <td>CREATE AI Act等侧重研究资源</td>
+          <td>GAIN AI Act转向出口管制与国家安全，67-31票两党共识通过</td>
+        </tr>
+        <tr>
+          <td><strong>出口管制</strong></td>
+          <td>个案审批模式</td>
+          <td>系统性立法限制，要求"美国优先"供应，国会获得否决权</td>
+        </tr>
+        <tr>
+          <td><strong>欧盟执法</strong></td>
+          <td>GPAI义务已生效但执法权未启动</td>
+          <td>8月2日执法权力正式激活，罚款最高3500万欧元或全球营收7%</td>
+        </tr>
+        <tr>
+          <td><strong>韩国监管</strong></td>
+          <td>AI基本法1月生效但处于宽限期</td>
+          <td>7月正式结束宽限期，启动高影响AI系统合规审查</td>
+        </tr>
+        <tr>
+          <td><strong>全球趋势</strong></td>
+          <td>各国分散立法</td>
+          <td>趋向同步收紧，中美欧韩7-8月形成"监管窗口期"共振</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== OVERVIEW SECTION ========== -->
+<div id="overview" class="section">
+  <div class="card">
+    <h2><span class="icon">🌍</span> 全球AI政策全景对比</h2>
+    <div class="two-col">
+      <div>
+        <img src="images/policy_type_comparison.png" alt="政策类型对比" class="chart-img">
+      </div>
+      <div>
+        <img src="images/topic_comparison.png" alt="热点对比" class="chart-img">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📈</span> 政策发布数量月度趋势</h2>
+    <img src="images/monthly_trend.png" alt="月度趋势" class="chart-img">
+    <p style="margin-top:12px;color:var(--muted)">数据显示，2026年7月中国AI政策发布数量达到8项，美国/欧盟相关政策达到7项，均为年内峰值，反映出全球AI监管正在加速收紧。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🔥</span> 全球AI政策关键词与趋势摘要</h2>
+    <div class="two-col">
+      <div>
+        <h3 style="color:#e74c3c;margin-bottom:12px">国内热点趋势</h3>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">🚀 <strong>AI+制造</strong>：从上海到全国，工业大模型和智能体成为政策核心抓手</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">🌐 <strong>全球合作</strong>：发改委行动计划首次系统提出八大国际合作行动</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">⚖️ <strong>场景监管</strong>：拟人化互动服务管理办法填补AI情感陪伴监管空白</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">💰 <strong>精准补贴</strong>：地方政策从普惠转向精准，单项目补贴可达4000万</li>
+          <li style="padding:8px 0">🛡️ <strong>安全合规</strong>：电信和互联网行业AI安全专项行动启动</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:#3498db;margin-bottom:12px">国外热点趋势</h3>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">🚫 <strong>芯片管制</strong>：GAIN AI Act和AI Overwatch Act双重锁定对华芯片出口</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">⚡ <strong>执法激活</strong>：EU AI Act 8月2日正式执法，全球企业面临合规大考</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">🏛️ <strong>国会扩权</strong>：美国会获得敏感芯片出口许可否决权</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">🔍 <strong>合规审查</strong>：韩国结束宽限期，高影响AI系统正式进入审查</li>
+          <li style="padding:8px 0">📋 <strong>透明度</strong>：深度伪造标注、情感识别披露成为全球硬性要求</li>
         </ul>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <p>📊 2026年7月8日 AI政策日报 · 全球人工智能政策跟踪分析</p>
-    <p>数据来源：中国政府网、人民网、欧盟委员会、FTC、联合国ITU、Federal Register等权威渠道</p>
-    <p style="margin-top:8px;">本报告由AI自动生成，仅供参考。政策内容以官方原文为准。</p>
+  <div class="card">
+    <h2><span class="icon">📋</span> 今日（7月20日）政策动态</h2>
+    <p>2026世界人工智能大会(WAIC)于7月17日至20日在上海举行，今日为大会闭幕日。大会期间（7月17日）集中发布了多项国家级和地方级AI政策，包括发改委《人工智能合作发展行动计划》和上海《AI+制造13条措施》等重磅文件。今日暂无新的独立政策发布，但WAIC大会成果将持续影响后续政策制定。</p>
+    <div class="timeline-item" style="margin-top:16px">
+      <div class="timeline-date">7月20日</div>
+      <div class="timeline-content">
+        <h4>2026世界人工智能大会闭幕</h4>
+        <p>三地四馆、10万㎡展区、1100+企业参与，多项政策在大会期间发布</p>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Download Button -->
-<div class="download-bar">
-  <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">
-    <span class="spinner"></span>
-    📄 下载PDF报告
-  </button>
 </div>
 
+<footer class="footer">
+  <p>AI政策日报 | 数据更新时间：2026年7月20日 | 数据来源：国家发展和改革委员会、工信部、上海市经信委、美国政府、欧盟委员会等官方渠道</p>
+  <p>本报告仅供研究参考，政策解读以官方发布为准</p>
+</footer>
+
+<button class="btn-pdf" onclick="downloadPDF()">📄 下载PDF报告</button>
+
 <script>
-// Tab switching
-function switchTab(tabId) {
+function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  event.currentTarget.classList.add('active');
-  // Render charts when analysis tab is shown
-  if (tabId === 'analysis') {
-    setTimeout(renderCharts, 100);
-  }
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
 }
 
-// Charts
-let chartsRendered = false;
-function renderCharts() {
-  if (chartsRendered) return;
-  chartsRendered = true;
-
-  // Common options
-  const commonOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: { legend: { labels: { font: { size: 12 } } } }
+function downloadPDF() {
+  const element = document.body;
+  const opt = {
+    margin: [10, 10, 10, 10],
+    filename: 'AI政策日报_2026-07-20.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
-
-  // 1. Timeline distribution
-  new Chart(document.getElementById('chartTimeline'), {
-    type: 'bar',
-    data: {
-      labels: ['7月1日', '7月2日', '7月6日', '7月7日', '7月8日', '7月15日', '7月31日', '8月2日'],
-      datasets: [{
-        label: '政策/事件数量',
-        data: [2, 1, 1, 2, 1, 1, 1, 1],
-        backgroundColor: ['#3b82f6', '#3b82f6', '#3b82f6', '#3b82f6', '#ef4444', '#f59e0b', '#3b82f6', '#f59e0b'],
-        borderRadius: 6,
-      }]
-    },
-    options: { ...commonOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+  // Show all sections for PDF
+  document.querySelectorAll('.section').forEach(s => s.classList.add('active'));
+  document.querySelector('nav').style.display = 'none';
+  document.querySelector('.btn-pdf').style.display = 'none';
+  
+  html2pdf().set(opt).from(element).save().then(() => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('domestic').classList.add('active');
+    document.querySelector('nav').style.display = 'flex';
+    document.querySelector('.btn-pdf').style.display = 'block';
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('nav button')[0].classList.add('active');
   });
-
-  // 2. Region distribution
-  new Chart(document.getElementById('chartRegion'), {
-    type: 'doughnut',
-    data: {
-      labels: ['中国（国家级）', '中国（地方级）', '欧盟', '美国（联邦）', '美国（州级）', '联合国', '韩国'],
-      datasets: [{
-        data: [4, 1, 2, 2, 1, 2, 1],
-        backgroundColor: ['#1e40af', '#059669', '#f59e0b', '#3b82f6', '#93c5fd', '#8b5cf6', '#ef4444'],
-        borderWidth: 2, borderColor: '#fff',
-      }]
-    },
-    options: { ...commonOptions, plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } } }
-  });
-
-  // 3. Category distribution
-  new Chart(document.getElementById('chartCategory'), {
-    type: 'pie',
-    data: {
-      labels: ['AI安全与治理', 'AI应用与产业', '内容标识与深度合成', '数据要素', '网络安全', 'AI伦理', 'AI系统准确性', '国际协作'],
-      datasets: [{
-        data: [5, 4, 3, 2, 2, 2, 1, 2],
-        backgroundColor: ['#dc2626', '#2563eb', '#7c3aed', '#059669', '#0891b2', '#d97706', '#be185d', '#4f46e5'],
-        borderWidth: 2, borderColor: '#fff',
-      }]
-    },
-    options: { ...commonOptions, plugins: { legend: { position: 'bottom', labels: { padding: 10, font: { size: 11 } } } } }
-  });
-
-  // 4. Comparison radar
-  new Chart(document.getElementById('chartComparison'), {
-    type: 'radar',
-    data: {
-      labels: ['立法力度', '执法强度', '创新支持', '安全监管', '国际合作', '产业推动'],
-      datasets: [
-        { label: '中国', data: [9, 9, 8, 9, 7, 9], borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.15)', pointRadius: 4 },
-        { label: '美国(联邦)', data: [5, 6, 9, 7, 6, 8], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.15)', pointRadius: 4 },
-        { label: '欧盟', data: [9, 7, 7, 9, 9, 7], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.15)', pointRadius: 4 },
-      ]
-    },
-    options: {
-      ...commonOptions,
-      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2 } } },
-      plugins: { legend: { position: 'bottom' } }
-    }
-  });
-
-  // 5. Trend chart
-  new Chart(document.getElementById('chartTrend'), {
-    type: 'line',
-    data: {
-      labels: ['2024 Q1', 'Q2', 'Q3', 'Q4', '2025 Q1', 'Q2', 'Q3', 'Q4', '2026 Q1', 'Q2', 'Q3(7月)'],
-      datasets: [
-        {
-          label: '中国AI政策数量',
-          data: [3, 4, 5, 6, 5, 7, 8, 9, 6, 8, 6],
-          borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.1)', tension: 0.3, fill: true,
-        },
-        {
-          label: '美国AI政策数量',
-          data: [4, 5, 4, 6, 3, 4, 5, 6, 4, 5, 4],
-          borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', tension: 0.3, fill: true,
-        },
-        {
-          label: '欧盟AI政策数量',
-          data: [3, 3, 4, 4, 5, 4, 5, 5, 4, 4, 3],
-          borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', tension: 0.3, fill: true,
-        }
-      ]
-    },
-    options: { ...commonOptions, scales: { y: { beginAtZero: true } } }
-  });
-
-  // 6. Radar for hot content
-  new Chart(document.getElementById('chartRadar'), {
-    type: 'radar',
-    data: {
-      labels: ['AI安全治理', '拟人化交互监管', '内容标识/水印', '数据要素市场', 'AI+产业融合', '网络安全+AI', '国际治理协作', 'AI伦理审查', '算法备案执法', '算力基础设施'],
-      datasets: [
-        { label: '政策关注度（2026年7月）', data: [10, 9, 9, 8, 8, 7, 8, 7, 8, 6], borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.15)', pointRadius: 5 },
-        { label: '政策关注度（2025年同期）', data: [7, 3, 5, 5, 6, 4, 5, 5, 5, 5], borderColor: '#94a3b8', backgroundColor: 'rgba(148,163,184,0.1)', pointRadius: 4, borderDash: [5, 5] },
-      ]
-    },
-    options: {
-      ...commonOptions,
-      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2 } } },
-      plugins: { legend: { position: 'bottom' } }
-    }
-  });
-}
-
-// Auto-render charts on page load if analysis tab is active
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('analysis').classList.contains('active')) {
-    renderCharts();
-  }
-});
-
-// PDF Download
-async function downloadPDF() {
-  const btn = document.getElementById('downloadBtn');
-  btn.classList.add('loading');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> 正在生成PDF，请稍候...';
-
-  try {
-    const html2pdf = window.jspdf;
-    const { jsPDF } = html2pdf;
-
-    // Make all sections visible for PDF
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('active'));
-    document.querySelector('.download-bar').style.display = 'none';
-
-    // Wait for charts to render
-    renderCharts();
-    await new Promise(r => setTimeout(r, 1500));
-
-    // Capture using html2canvas
-    const htmlElement = document.querySelector('.container');
-    const canvas = await html2canvas(htmlElement, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#f8fafc',
-      windowWidth: 1200,
-    });
-
-    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    pdf.save('AI政策日报_2026年7月8日.pdf');
-
-    // Restore sections
-    document.querySelectorAll('.section').forEach(s => s.style.display = '');
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('.tab-btn').classList.add('active');
-    document.getElementById('domestic').style.display = 'block';
-    document.getElementById('international').style.display = 'none';
-    document.getElementById('analysis').style.display = 'none';
-    document.querySelector('.download-bar').style.display = '';
-
-    btn.classList.remove('loading');
-    btn.disabled = false;
-    btn.innerHTML = '<span class="spinner"></span> 📄 下载PDF报告';
-  } catch (err) {
-    console.error('PDF generation error:', err);
-    btn.classList.remove('loading');
-    btn.disabled = false;
-    btn.innerHTML = '<span class="spinner"></span> 📄 下载PDF报告';
-    alert('PDF生成失败，请重试。错误信息：' + err.message);
-  }
 }
 </script>
-
 </body>
 </html>
